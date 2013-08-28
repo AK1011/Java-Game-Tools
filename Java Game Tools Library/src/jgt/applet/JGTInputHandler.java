@@ -12,6 +12,13 @@ public class JGTInputHandler {
 	public JGTMouseWheelHandler mouseWheelHandler;
 	public JGTKeyboardHandler keyboardHandler;
 	
+	public JGTInputHandler() {
+		mouseHandler = null;
+		mouseMotionHandler = null;
+		mouseWheelHandler = null;
+		keyboardHandler = null;
+	}
+	
 	public JGTInputHandler(JGTMouseHandler mouseHandler, JGTMouseMotionHandler mouseMotionHandler, JGTMouseWheelHandler mouseWheelHandler, JGTKeyboardHandler keyboardHandler) {
 		this.mouseHandler = mouseHandler;
 		this.mouseMotionHandler = mouseMotionHandler;
