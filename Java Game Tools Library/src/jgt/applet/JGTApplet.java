@@ -52,10 +52,18 @@ public class JGTApplet extends Applet implements Runnable {
 		setLayout(new BorderLayout());
 		tick = 0;
 		
-		canvas.addMouseListener(inputHandler.getMouseHandler());
-		canvas.addMouseMotionListener(inputHandler.getMouseMotionHandler());
-		canvas.addMouseWheelListener(inputHandler.getMouseWheelHandler());
-		canvas.addKeyListener(inputHandler.getKeyboardHandler());
+		if (inputHandler.getMouseHandler() != null) {
+			canvas.addMouseListener(inputHandler.getMouseHandler());
+		}
+		if (inputHandler.getMouseMotionHandler() != null) {
+			canvas.addMouseMotionListener(inputHandler.getMouseMotionHandler());
+		}
+		if (inputHandler.getMouseWheelHandler() != null) {
+			canvas.addMouseWheelListener(inputHandler.getMouseWheelHandler());
+		}
+		if (inputHandler.getKeyboardHandler() != null) {
+			canvas.addKeyListener(inputHandler.getKeyboardHandler());
+		}
 		
 		System.out.println("Hello");
 	}
