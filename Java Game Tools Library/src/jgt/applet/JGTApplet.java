@@ -37,6 +37,10 @@ public class JGTApplet extends Applet implements Runnable {
 		this(width, height, ticksPerSecond, new JGTState());
 	}
 	
+	public JGTApplet(int width, int height, JGTState state) {
+		this(width, height, 60, state);
+	}
+	
 	public JGTApplet(int width, int height, int ticksPerSecond, JGTState state) {
 		this.width = width;
 		this.height = height;
