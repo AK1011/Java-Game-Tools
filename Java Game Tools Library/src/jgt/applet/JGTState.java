@@ -1,6 +1,7 @@
 package jgt.applet;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 public class JGTState {
 	
@@ -19,6 +20,14 @@ public class JGTState {
 	}
 	
 	public void render(Graphics g) {
+		
+	}
+	
+	public void keyAction(ArrayList<JGTKeyAction> actions) {
+		
+	}
+	
+	public void mouseAction(ArrayList<JGTMouseAction> actions) {
 		
 	}
 	

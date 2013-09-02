@@ -21,7 +21,8 @@ public class JGTApplet extends Applet implements Runnable {
 	private JGTCanvas canvas;
 	private JGTState currentState;
 	
-	private JGTInputHandler inputHandler;
+	private JGTKeyboardHandler keyboardHandler;
+	private JGTMouseHandler mouseHandler;
 	
 	
 	public JGTApplet() {
@@ -33,10 +34,15 @@ public class JGTApplet extends Applet implements Runnable {
 	}
 	
 	public JGTApplet(int width, int height, int ticksPerSecond) {
+		this(width, height, ticksPerSecond, new JGTState());
+	}
+	
+	public JGTApplet(int width, int height, int ticksPerSecond, JGTState state) {
 		this.width = width;
 		this.height = height;
-		this.currentState = new JGTState();
-		this.inputHandler = new JGTInputHandler();
+		this.currentState = state;
+		this.keyboardHandler = new JGTKeyboardHandler(this);
+		this.mouseHandler = new JGTMouseHandler(this);
 		this.canvas = new JGTCanvas(this);
 		
 		this.ticksPerSecond = ticksPerSecond;
@@ -47,18 +53,14 @@ public class JGTApplet extends Applet implements Runnable {
 		setLayout(new BorderLayout());
 		tick = 0;
 		
-		add(canvas, BorderLayout.CENTER);
-		if (inputHandler.getMouseHandler() != null) {
-			canvas.addMouseListener(inputHandler.getMouseHandler());
+		if (canvas != null) {
+			add(canvas, BorderLayout.CENTER);
 		}
-		if (inputHandler.getMouseMotionHandler() != null) {
-			canvas.addMouseMotionListener(inputHandler.getMouseMotionHandler());
+		if (mouseHandler != null) {
+			canvas.addMouseListener(mouseHandler);
 		}
-		if (inputHandler.getMouseWheelHandler() != null) {
-			canvas.addMouseWheelListener(inputHandler.getMouseWheelHandler());
-		}
-		if (inputHandler.getKeyboardHandler() != null) {
-			canvas.addKeyListener(inputHandler.getKeyboardHandler());
+		if (keyboardHandler != null) {
+			canvas.addKeyListener(keyboardHandler);
 		}
 		
 		System.out.println("Initialized Applet.");
@@ -80,8 +82,15 @@ public class JGTApplet extends Applet implements Runnable {
 	
 	private void step() {
 		tick++;
-		currentState.step();
-		inputHandler.step();
+		if (currentState != null) {
+			currentState.step();
+		}
+		if (mouseHandler != null) {
+			mouseHandler.step();
+		}
+		if (keyboardHandler != null) {
+			keyboardHandler.step();
+		}
 	}
 	
 	private void render() {
@@ -108,20 +117,7 @@ public class JGTApplet extends Applet implements Runnable {
 		this.currentState = state;
 	}
 	
-	public void setInputHandler(JGTInputHandler inputHandler) {
-		this.inputHandler = inputHandler;
-	}
-	
 	public JGTState getState() {
 		return currentState;
-	}
-	
-	public JGTInputHandler getInputHandler() {
-		return inputHandler;
-	}
-	
-	public void setup(JGTState state, JGTInputHandler inputHandler) {
-		setState(state);
-		setInputHandler(inputHandler);
 	}
 }
