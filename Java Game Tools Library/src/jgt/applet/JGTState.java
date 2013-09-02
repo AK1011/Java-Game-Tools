@@ -19,11 +19,23 @@ public class JGTState {
 		
 	}
 	
-	public void keyAction(ArrayList<JGTKeyAction> actions) {
+	protected void keyActions(ArrayList<JGTKeyAction> actions) {
+		for (JGTKeyAction action : actions) {
+			keyAction(action);
+		}
+	}
+	
+	public void keyAction(JGTKeyAction action) {
 		
 	}
 	
-	public void mouseAction(ArrayList<JGTMouseAction> actions) {
+	protected void mouseActions(ArrayList<JGTMouseAction> actions) {
+		for (JGTMouseAction action : actions) {
+			mouseAction(action);
+		}
+	}
+	
+	public void mouseAction(JGTMouseAction action) {
 		
 	}
 	

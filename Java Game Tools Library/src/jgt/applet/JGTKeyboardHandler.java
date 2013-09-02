@@ -34,7 +34,7 @@ public class JGTKeyboardHandler implements KeyListener {
 		ArrayList<JGTKeyAction> currentActions = new ArrayList<JGTKeyAction>();
 		currentActions.addAll(keyActions);
 		keyActions.clear();
-		applet.getState().keyAction(currentActions);
+		applet.getState().keyActions(currentActions);
 	}
 
 }
