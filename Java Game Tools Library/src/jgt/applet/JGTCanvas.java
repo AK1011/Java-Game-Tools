@@ -13,7 +13,7 @@ public class JGTCanvas extends Canvas {
 	private static final long serialVersionUID = 1L;
 	
 	public JGTApplet applet;
-	public Color background;
+	private Color background;
 	public BufferedImage screen;
 	
 	public JGTCanvas(JGTApplet applet) {
@@ -26,7 +26,7 @@ public class JGTCanvas extends Canvas {
 		screen = new BufferedImage(applet.width, applet.height, BufferedImage.TYPE_INT_RGB);
 	}
 	
-	public void render(JGTState state) {
+	protected void render(JGTState state) {
 		Graphics g = screen.getGraphics();
 		g.setColor(background);
 		g.fillRect(0, 0, applet.width, applet.height);

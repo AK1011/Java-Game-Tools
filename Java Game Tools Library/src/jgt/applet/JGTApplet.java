@@ -18,10 +18,10 @@ public class JGTApplet extends Applet implements Runnable {
 	private double previousTime;
 	private int ticksPerSecond;
 	
-	public JGTCanvas canvas;
-	public JGTState currentState;
+	private JGTCanvas canvas;
+	private JGTState currentState;
 	
-	public JGTInputHandler inputHandler;
+	private JGTInputHandler inputHandler;
 	
 	
 	public JGTApplet() {
@@ -29,21 +29,17 @@ public class JGTApplet extends Applet implements Runnable {
 	}
 	
 	public JGTApplet(int width, int height) {
-		this(width, height, new JGTState());
+		this(width, height, 60);
 	}
 	
-	public JGTApplet(int width, int height, JGTState state) {
-		this(width, height, state, new JGTInputHandler());
-	}
-	
-	public JGTApplet(int width, int height, JGTState state, JGTInputHandler inputHandler) {
+	public JGTApplet(int width, int height, int ticksPerSecond) {
 		this.width = width;
 		this.height = height;
-		this.currentState = state;
-		this.inputHandler = inputHandler;
+		this.currentState = new JGTState();
+		this.inputHandler = new JGTInputHandler();
 		this.canvas = new JGTCanvas(this);
 		
-		this.ticksPerSecond = 60;   //TODO make this a parameter later
+		this.ticksPerSecond = ticksPerSecond;
 	}
 	
 	public void init() {
@@ -51,6 +47,7 @@ public class JGTApplet extends Applet implements Runnable {
 		setLayout(new BorderLayout());
 		tick = 0;
 		
+		add(canvas, BorderLayout.CENTER);
 		if (inputHandler.getMouseHandler() != null) {
 			canvas.addMouseListener(inputHandler.getMouseHandler());
 		}
@@ -64,10 +61,10 @@ public class JGTApplet extends Applet implements Runnable {
 			canvas.addKeyListener(inputHandler.getKeyboardHandler());
 		}
 		
-		System.out.println("Hello");
+		System.out.println("Initialized Applet.");
 	}
 	
-	public void loop() {
+	private void loop() {
 		double currentTime = System.nanoTime() / 100000.0;
 		if (currentTime - previousTime < 1000.0 / (double)(ticksPerSecond)) {
 			try {
@@ -81,13 +78,13 @@ public class JGTApplet extends Applet implements Runnable {
 		render();
 	}
 	
-	public void step() {
+	private void step() {
 		tick++;
 		currentState.step();
 		inputHandler.step();
 	}
 	
-	public void render() {
+	private void render() {
 		canvas.render(currentState);
 	}
 	
@@ -107,4 +104,24 @@ public class JGTApplet extends Applet implements Runnable {
 		}
 	}
 	
+	public void setState(JGTState state) {
+		this.currentState = state;
+	}
+	
+	public void setInputHandler(JGTInputHandler inputHandler) {
+		this.inputHandler = inputHandler;
+	}
+	
+	public JGTState getState() {
+		return currentState;
+	}
+	
+	public JGTInputHandler getInputHandler() {
+		return inputHandler;
+	}
+	
+	public void setup(JGTState state, JGTInputHandler inputHandler) {
+		setState(state);
+		setInputHandler(inputHandler);
+	}
 }

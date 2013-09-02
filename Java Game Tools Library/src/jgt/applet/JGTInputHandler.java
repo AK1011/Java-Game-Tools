@@ -7,23 +7,36 @@ import java.awt.event.MouseWheelListener;
 
 public class JGTInputHandler {
 	
-	public JGTMouseHandler mouseHandler;
-	public JGTMouseMotionHandler mouseMotionHandler;
-	public JGTMouseWheelHandler mouseWheelHandler;
-	public JGTKeyboardHandler keyboardHandler;
+	private JGTMouseHandler mouseHandler;
+	private JGTMouseMotionHandler mouseMotionHandler;
+	private JGTMouseWheelHandler mouseWheelHandler;
+	private JGTKeyboardHandler keyboardHandler;
+	
+	private JGTApplet applet;
 	
 	public JGTInputHandler() {
-		mouseHandler = null;
-		mouseMotionHandler = null;
-		mouseWheelHandler = null;
-		keyboardHandler = null;
+		this(null, null, null, null, null);
 	}
 	
-	public JGTInputHandler(JGTMouseHandler mouseHandler, JGTMouseMotionHandler mouseMotionHandler, JGTMouseWheelHandler mouseWheelHandler, JGTKeyboardHandler keyboardHandler) {
+	public JGTInputHandler(JGTApplet applet) {
+		this(null, null, null, null, applet);
+	}
+	
+	public JGTInputHandler(
+			JGTMouseHandler mouseHandler, JGTMouseMotionHandler mouseMotionHandler,
+			JGTMouseWheelHandler mouseWheelHandler, JGTKeyboardHandler keyboardHandler) {
+		this(mouseHandler, mouseMotionHandler, mouseWheelHandler, keyboardHandler, null);
+	}
+	
+	public JGTInputHandler(
+			JGTMouseHandler mouseHandler, JGTMouseMotionHandler mouseMotionHandler,
+			JGTMouseWheelHandler mouseWheelHandler, JGTKeyboardHandler keyboardHandler,
+			JGTApplet applet) {
 		this.mouseHandler = mouseHandler;
 		this.mouseMotionHandler = mouseMotionHandler;
 		this.mouseWheelHandler = mouseWheelHandler;
 		this.keyboardHandler = keyboardHandler;
+		this.applet = applet;
 	}
 	
 	public void step() {
@@ -55,6 +68,14 @@ public class JGTInputHandler {
 	
 	public KeyListener getKeyboardHandler() {
 		return keyboardHandler;
+	}
+	
+	public void setApplet(JGTApplet applet) {
+		this.applet = applet;
+	}
+	
+	public JGTApplet getApplet() {
+		return applet;
 	}
 	
 }
