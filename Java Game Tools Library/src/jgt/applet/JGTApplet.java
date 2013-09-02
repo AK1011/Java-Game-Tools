@@ -45,6 +45,7 @@ public class JGTApplet extends Applet implements Runnable {
 		this.width = width;
 		this.height = height;
 		this.currentState = state;
+		state.setApplet(this);
 		this.keyboardHandler = new JGTKeyboardHandler(this);
 		this.mouseHandler = new JGTMouseHandler(this);
 		this.canvas = new JGTCanvas(this);

@@ -11,10 +11,6 @@ public class JGTState {
 		
 	}
 	
-	public JGTState(JGTApplet applet) {
-		this.applet = applet;
-	}
-	
 	public void step() {
 		
 	}

@@ -13,6 +13,7 @@ public class JGTMouseHandler implements MouseListener, MouseMotionListener, Mous
 	public ArrayList<JGTMouseAction> mouseActions;
 	
 	public JGTMouseHandler(JGTApplet applet) {
+		mouseActions = new ArrayList<JGTMouseAction>();
 		this.applet = applet;
 	}
 	
