@@ -2,6 +2,8 @@ package jgt.applet;
 
 import java.applet.Applet;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class JGTApplet extends Applet implements Runnable {
 
@@ -20,6 +22,7 @@ public class JGTApplet extends Applet implements Runnable {
 	
 	private JGTCanvas canvas;
 	private JGTState currentState;
+	private ArrayList<JGTState> states;
 	
 	private JGTKeyboardHandler keyboardHandler;
 	private JGTMouseHandler mouseHandler;
@@ -42,15 +45,17 @@ public class JGTApplet extends Applet implements Runnable {
 	}
 	
 	public JGTApplet(int width, int height, int ticksPerSecond, JGTState state) {
+		this(width, height, ticksPerSecond, new ArrayList<JGTState>(Arrays.asList(state)));
+	}
+	
+	public JGTApplet(int width, int height, int ticksPerSecond, ArrayList<JGTState> states) {
 		this.width = width;
 		this.height = height;
-		this.currentState = state;
-		state.setApplet(this);
 		this.keyboardHandler = new JGTKeyboardHandler(this);
 		this.mouseHandler = new JGTMouseHandler(this);
-		this.canvas = new JGTCanvas(this);
-		
+		this.canvas = new JGTCanvas(this);		
 		this.ticksPerSecond = ticksPerSecond;
+		addStatesAsCurrentState(states);
 	}
 	
 	public void init() {
@@ -124,5 +129,27 @@ public class JGTApplet extends Applet implements Runnable {
 	
 	public JGTState getState() {
 		return currentState;
+	}
+	
+	public void addStates(ArrayList<JGTState> newStates) {
+		this.states.addAll(newStates);
+		for (JGTState newState : newStates) {
+			newState.setApplet(this);
+		}
+	}
+	
+	public void addState(JGTState newState) {
+		this.states.add(newState);
+		newState.setApplet(this);
+	}
+	
+	public void addStatesAsCurrentState(ArrayList<JGTState> newStates) {
+		addStates(newStates);
+		this.currentState = newStates.get(0);
+	}
+	
+	public void addStateAsCurrentState(JGTState newState) {
+		addState(newState);
+		this.currentState = newState;
 	}
 }
