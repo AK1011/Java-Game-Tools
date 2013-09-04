@@ -34,17 +34,65 @@ public class JGTObject {
 		
 	}
 	
+	/// *** COLLISION *** ///
+	
 	public boolean collides(JGTObject other) {
-		return false; //collidesHorizontal(other) && collidesVertical(other);
+		return collidesHorizontallyWith(other) && collidesVerticallyWith(other);
 	}
 	
-	public boolean isRightOf(JGTObject other) {
+	// ** Horizontal Collision ** //
+	
+	public boolean isCompletelyRightOf(JGTObject other) {
 		return x > other.x + other.width;
 	}
 	
-	public boolean isLeftOf(JGTObject other) {
+	public boolean isCompletelyLeftOf(JGTObject other) {
 		return x + width < other.x;
 	}
+	
+	public boolean isRightOf(JGTObject other) {
+		return MathUtil.average(x, width) > MathUtil.average(other.x, other.width);
+	}
+	
+	public boolean isLeftOf(JGTObject other) {
+		return MathUtil.average(x, width) < MathUtil.average(other.x, other.width);
+	}
+	
+	public boolean isHorizontallyCentredWith(JGTObject other) {
+		return MathUtil.average(x, width) == MathUtil.average(other.x, other.width);
+	}
+	
+	public boolean collidesHorizontallyWith(JGTObject other) {
+		return !(isCompletelyLeftOf(other) || isCompletelyRightOf(other));
+	}
+	
+	// ** Vertical Collision ** //
+	
+	public boolean isCompletelyUpOf(JGTObject other) {
+		return y > other.y + other.height;
+	}
+	
+	public boolean isCompletelyDownOf(JGTObject other) {
+		return y + height < other.y;
+	}
+	
+	public boolean isUpOf(JGTObject other) {
+		return MathUtil.average(y, height) > MathUtil.average(other.y, other.height);
+	}
+	
+	public boolean isDownOf(JGTObject other) {
+		return MathUtil.average(y, height) < MathUtil.average(other.y, other.height);
+	}
+	
+	public boolean isVerticallyCentredWith(JGTObject other) {
+		return MathUtil.average(y, height) == MathUtil.average(other.y, other.height);
+	}
+	
+	public boolean collidesVerticallyWith(JGTObject other) {
+		return !(isCompletelyUpOf(other) || isCompletelyDownOf(other));
+	}
+	
+	// *** Position *** //
 	
 	public double distance(JGTObject other) {
 		return MathUtil.distance(x, y, other.x, other.y);

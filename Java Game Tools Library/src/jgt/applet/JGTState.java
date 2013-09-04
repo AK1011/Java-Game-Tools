@@ -6,17 +6,26 @@ import java.util.ArrayList;
 public class JGTState {
 	
 	private JGTApplet applet;
+	private ArrayList<JGTObject> objects;
 	
 	public JGTState() {
-		
+		objects = new ArrayList<JGTObject>();
+	}
+	
+	public JGTState(ArrayList<JGTObject> objects) {
+		addObjects(objects);
 	}
 	
 	public void step() {
-		
+		for (JGTObject o : objects) {
+			o.step();
+		}
 	}
 	
 	public void render(Graphics g) {
-		
+		for (JGTObject o : objects) {
+			o.render(g);
+		}
 	}
 	
 	protected void keyActions(ArrayList<JGTKeyAction> actions) {
@@ -45,6 +54,20 @@ public class JGTState {
 	
 	public JGTApplet getApplet() {
 		return applet;
+	}
+	
+	public void addObject(JGTObject newObject) {
+		if (objects == null) {
+			objects = new ArrayList<JGTObject>();
+		}
+		objects.add(newObject);
+	}
+	
+	public void addObjects(ArrayList<JGTObject> newObjects) {
+		if (objects == null) {
+			objects = new ArrayList<JGTObject>();
+		}
+		objects.addAll(newObjects);
 	}
 	
 }
