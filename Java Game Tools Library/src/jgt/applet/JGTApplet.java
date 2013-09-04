@@ -132,6 +132,9 @@ public class JGTApplet extends Applet implements Runnable {
 	}
 	
 	public void addStates(ArrayList<JGTState> newStates) {
+		if (this.states == null) {
+			this.states = new ArrayList<JGTState>();
+		}
 		this.states.addAll(newStates);
 		for (JGTState newState : newStates) {
 			newState.setApplet(this);
@@ -139,6 +142,9 @@ public class JGTApplet extends Applet implements Runnable {
 	}
 	
 	public void addState(JGTState newState) {
+		if (this.states == null) {
+			this.states = new ArrayList<JGTState>();
+		}
 		this.states.add(newState);
 		newState.setApplet(this);
 	}
