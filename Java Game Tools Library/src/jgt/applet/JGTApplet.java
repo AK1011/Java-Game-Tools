@@ -80,7 +80,7 @@ public class JGTApplet extends Applet implements Runnable {
 	}
 	
 	private void loop() {
-		double currentTime = System.nanoTime() / 100000.0;
+		double currentTime = System.nanoTime() / 1000000.0;
 		if (currentTime - previousTime < 1000.0 / (double)(ticksPerSecond)) {
 			try {
 				Thread.sleep((long) (1000.0 / (double)(ticksPerSecond) - (currentTime - previousTime)));
@@ -88,7 +88,7 @@ public class JGTApplet extends Applet implements Runnable {
 				//do nothing with the stack trace
 			}
 		}
-		previousTime = System.nanoTime() / 1000000.0;
+		previousTime = currentTime;
 		step();
 		render();
 	}

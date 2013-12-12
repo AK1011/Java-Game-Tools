@@ -130,4 +130,9 @@ public class JGTObject {
 		return MathUtil.distance(x, y, other.x, other.y);
 	}
 	
+	public void move(int dx, int dy) {
+		x += dx;
+		y += dy;
+	}
+	
 }

@@ -10,4 +10,5 @@ public class JGTPreferences {
 	
 	public static final String IMAGE_PATH = "images";
 	public static final String AUDIO_PATH = "audio";
+	public static final String ANIMATION_PATH = "animations";
 }

@@ -73,4 +73,8 @@ public class JGTState {
 		objects.addAll(newObjects);
 	}
 	
+	public ArrayList<JGTObject> getObjects() {
+		return objects;
+	}
+	
 }
