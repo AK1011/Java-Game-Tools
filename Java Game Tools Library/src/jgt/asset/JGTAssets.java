@@ -18,7 +18,7 @@ public class JGTAssets {
 	
 	private static Map<String, BufferedImage> images = new HashMap<String, BufferedImage>();
 	private static Map<String, Clip> audio = new HashMap<String, Clip>();
-	private static Map<String, Animation> animations = new HashMap<String, Animation>();
+	private static Map<String, AnimationHolder> animations = new HashMap<String, AnimationHolder>();
 	
 	private static boolean loaded = false;
 	
@@ -40,7 +40,11 @@ public class JGTAssets {
 	}
 	
 	public static Animation getAnimation(String name) {
-		return animations.get(name);
+		return new Animation(animations.get(name));
+	}
+	
+	public static Animation getAnimation(String name, double timer) {
+		return new Animation(animations.get(name), timer);
 	}
 	
 	private static void loadAnimations() {
@@ -64,7 +68,7 @@ public class JGTAssets {
 								e.printStackTrace();
 						}
 					}
-					animations.put(s, new Animation(images, 2));
+					animations.put(s, new AnimationHolder(images));
 				}
 			}
 		}

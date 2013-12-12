@@ -1,33 +1,24 @@
 package jgt.asset;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Animation {
 
-	private ArrayList<BufferedImage> images;
+	private AnimationHolder animation;
 	private int current;
 	private int loopsLeft;
 	private int time;
 	private int timer;
 	
-	public Animation() {
-		this(new ArrayList<BufferedImage>(), 1);
+	public Animation(AnimationHolder animation) {
+		this(animation, 1);
 	}
 	
-	public Animation(ArrayList<BufferedImage> images) {
-		this(images, 1);
-	}
-	
-	public Animation(ArrayList<BufferedImage> images, double timer) {
-		setImages(images);
+	public Animation(AnimationHolder animation, double timer) {
 		loop();
-		setTimer(timer);
-	}
-	
-	public void setImages(ArrayList<BufferedImage> images) {
-		this.images = images;
 		current = 0;
+		this.animation = animation;
+		setTimer(timer);
 	}
 	
 	public void setTimer(double timer) {
@@ -35,27 +26,20 @@ public class Animation {
 		this.time = this.timer = (int)(60.0 * timer);
 	}
 	
-	public int count() {
-		return images.size();
-	}
-	
 	public int place() {
 		return current;
 	}
 	
 	public BufferedImage currentImage() {
-		if (images.size() <= current) {
-			return null;
-		}
-		return images.get(current);
+		return animation.getImage(current);
 	}
 	
 	public BufferedImage play() {
 		if (loopsLeft != 0) {
 			if (time-- <= 0) {
 				time = timer;
-				BufferedImage image = images.get(current);
-				if (++current >= count()) {
+				BufferedImage image = currentImage();
+				if (++current >= animation.count()) {
 					current = 0;
 					if (loopsLeft > 0) {
 						loopsLeft--;
