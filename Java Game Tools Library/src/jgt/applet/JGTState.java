@@ -3,16 +3,19 @@ package jgt.applet;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import jgt.asset.JGTAssets;
+
 public class JGTState {
 	
 	private JGTApplet applet;
 	private ArrayList<JGTObject> objects;
 	
 	public JGTState() {
-		objects = new ArrayList<JGTObject>();
+		this(new ArrayList<JGTObject>());
 	}
 	
 	public JGTState(ArrayList<JGTObject> objects) {
+		JGTAssets.loadAssets();
 		addObjects(objects);
 	}
 	

@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import jgt.asset.JGTAssets;
+
 public class JGTApplet extends Applet implements Runnable {
 
 	/**
@@ -51,11 +53,12 @@ public class JGTApplet extends Applet implements Runnable {
 	public JGTApplet(int width, int height, int ticksPerSecond, ArrayList<JGTState> states) {
 		this.width = width;
 		this.height = height;
+		JGTAssets.loadAssets();
 		this.keyboardHandler = new JGTKeyboardHandler(this);
 		this.mouseHandler = new JGTMouseHandler(this);
 		this.canvas = new JGTCanvas(this);		
 		this.ticksPerSecond = ticksPerSecond;
-		addStatesAsCurrentState(states);
+		addStatesAsCurrent(states);
 	}
 	
 	public void init() {
@@ -149,12 +152,12 @@ public class JGTApplet extends Applet implements Runnable {
 		newState.setApplet(this);
 	}
 	
-	public void addStatesAsCurrentState(ArrayList<JGTState> newStates) {
+	public void addStatesAsCurrent(ArrayList<JGTState> newStates) {
 		addStates(newStates);
 		this.currentState = newStates.get(0);
 	}
 	
-	public void addStateAsCurrentState(JGTState newState) {
+	public void addStateAsCurrent(JGTState newState) {
 		addState(newState);
 		this.currentState = newState;
 	}
