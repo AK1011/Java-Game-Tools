@@ -12,9 +12,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import jgt.applet.JGTPreferences;
+import jgt.applet.Preferences;
 
-public class JGTAssets {
+public class Assets {
 	
 	private static Map<String, BufferedImage> images = new HashMap<String, BufferedImage>();
 	private static Map<String, Clip> audio = new HashMap<String, Clip>();
@@ -48,19 +48,19 @@ public class JGTAssets {
 	}
 	
 	private static void loadAnimations() {
-		File f = new File(JGTPreferences.ANIMATION_PATH);
+		File f = new File(Preferences.ANIMATION_PATH);
 		String[] folders = f.list();
 		String[] files;
 		
 		if (folders != null) {
 			for (String s : folders) {
-				f = new File(JGTPreferences.ANIMATION_PATH + "/" + s);
+				f = new File(Preferences.ANIMATION_PATH + "/" + s);
 				files = f.list();
 				if (files != null) {
 					ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
 					for (String ss : files) {
 						try {
-							BufferedImage readImage = ImageIO.read(new File(JGTPreferences.ANIMATION_PATH + "/" + s + "/" + ss));
+							BufferedImage readImage = ImageIO.read(new File(Preferences.ANIMATION_PATH + "/" + s + "/" + ss));
 							if (readImage != null) {
 								images.add(readImage);
 							}
@@ -75,13 +75,13 @@ public class JGTAssets {
 	}
 	
 	private static void loadImages() {
-		File f = new File(JGTPreferences.IMAGE_PATH);
+		File f = new File(Preferences.IMAGE_PATH);
 		String[] files = f.list();
 		
 		if (files != null) {
 			for (String s : files) {
 				try {
-					BufferedImage readImage = ImageIO.read(new File(JGTPreferences.IMAGE_PATH + "/" + s));
+					BufferedImage readImage = ImageIO.read(new File(Preferences.IMAGE_PATH + "/" + s));
 					if (readImage != null) {
 						images.put(s, readImage);
 					}
@@ -93,14 +93,14 @@ public class JGTAssets {
 	}
 	
 	private static void loadAudio() {
-		File f = new File(JGTPreferences.AUDIO_PATH);
+		File f = new File(Preferences.AUDIO_PATH);
 		String[] files = f.list();
 		
 		if (files != null) {
 			for (String s : files) {
 				try {
 					Clip clip = AudioSystem.getClip();
-					AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(JGTPreferences.AUDIO_PATH + "/" + s));
+					AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(Preferences.AUDIO_PATH + "/" + s));
 					clip.open(inputStream);
 				} catch (Exception e) {
 					System.err.println("Couldn't load audio: " + s);
@@ -111,7 +111,7 @@ public class JGTAssets {
 			/*
 			AudioClip readAudio;
 			for (String s : files) {
-				readAudio = applet.getAudioClip(applet.getCodeBase(), JGTPreferences.AUDIO_PATH + "/" + s);
+				readAudio = applet.getAudioClip(applet.getCodeBase(), Preferences.AUDIO_PATH + "/" + s);
 				if (readAudio != null) {
 					audio.put(s, readAudio);
 				}

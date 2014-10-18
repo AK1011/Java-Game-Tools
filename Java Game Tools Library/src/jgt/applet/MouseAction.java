@@ -2,7 +2,7 @@ package jgt.applet;
 
 import java.awt.event.MouseEvent;
 
-public class JGTMouseAction {
+public class MouseAction {
 		public enum Button {
 			right, left, middle
 		};
@@ -16,14 +16,14 @@ public class JGTMouseAction {
 		public int x;
 		public int y;
 
-		public JGTMouseAction(int buttonID, Action action, int x, int y) {
+		public MouseAction(int buttonID, Action action, int x, int y) {
 			this.button = setButton(buttonID);
 			this.action = action;
 			this.x = x;
 			this.y = y;
 		}
 
-		public JGTMouseAction(JGTMouseAction act) {
+		public MouseAction(MouseAction act) {
 			this.button = act.button;
 			this.action = act.action;
 			this.x = act.x;

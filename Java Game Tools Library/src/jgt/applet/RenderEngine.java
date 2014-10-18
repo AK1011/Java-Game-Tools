@@ -5,28 +5,30 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class JGTCanvas extends Canvas {
+import jgt.game.State;
+
+public class RenderEngine extends Canvas {
 
 	/**
 	 * Default Serial Version ID
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public JGTApplet applet;
+	public Main applet;
 	private Color background;
 	public BufferedImage screen;
 	
-	public JGTCanvas(JGTApplet applet) {
+	public RenderEngine(Main applet) {
 		this(applet, Color.blue);
 	}
 	
-	public JGTCanvas(JGTApplet applet, Color background) {
+	public RenderEngine(Main applet, Color background) {
 		this.applet = applet;
 		this.background = background;
 		screen = new BufferedImage(applet.width, applet.height, BufferedImage.TYPE_INT_RGB);
 	}
 	
-	protected void render(JGTState state) {
+	protected void render(State state) {
 		Graphics g = screen.getGraphics();
 		g.setColor(background);
 		g.fillRect(0, 0, applet.width, applet.height);

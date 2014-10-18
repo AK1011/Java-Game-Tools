@@ -3,7 +3,7 @@ package jgt.applet;
 /*
  * Preferences file for static final constants. Meant to be extended and overwritten if preferences are different for a project.
  */
-public class JGTPreferences {
+public class Preferences {
 	
 	//public static final String[] IMAGE_EXTENSIONS = {"png", "jpg"};
 	//public static final String[] AUDIO_EXTENSIONS = {"wav"};
